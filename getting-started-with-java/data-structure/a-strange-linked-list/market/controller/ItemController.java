@@ -14,6 +14,8 @@ public class ItemController {
     public final void addItem(Item item) {
         if (items == null) {
             items = new Item[0];
+
+            items[0] = item;
             return;
         }
 
@@ -27,14 +29,20 @@ public class ItemController {
     }
 
     public void removeItem(int index) {
+        // Create a new array of Item objects, one less in size than the original
         Item[] newItems = new Item[items.length - 1];
 
+        // Copy items from the original array to the new array up to the specified index
         for (int i = 0; i < index; i++) {
             newItems[i] = items[i];
         }
+        // Copy items from the original array to the new array, skipping the item at the
+        // specified index
         for (int i = index + 1; i < items.length; i++) {
             newItems[i - 1] = items[i];
         }
+
+        // swap
         items = newItems;
     }
 
