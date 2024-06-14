@@ -14,6 +14,14 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
         this.length++;
     }
 
+    private Node getLastNode(Node currentNode) {
+        if (currentNode.getNext() == null) {
+            return currentNode;
+        }
+
+        return getLastNode(currentNode.getNext());
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public void append(Object data) {
@@ -22,7 +30,11 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
          *
          * @param data The data of the new element to be appended.
          */
-        this.head.setNext(new Node<>(data));
+        Node current = this.head;
+
+        current = this.getLastNode(current);
+
+        current.setNext(new Node<>(data));
         this.length++;
     }
 
@@ -76,10 +88,27 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
         current.setNext(newNode);
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
-    public void pop() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pop'");
+    public Node pop() {
+        /**
+         * Removes the last element from the linked list and returns it.
+         */
+
+        if (this.head.getNext() == null || this.head == null) {
+            throw new IndexOutOfBoundsException("List is empty");
+        }
+
+        Node current = this.head;
+
+        current = this.getLastNode(current);
+
+        Node deletedNode = current;
+        current.setData(null);
+
+        this.length--;
+
+        return deletedNode;
     }
 
     @Override
@@ -114,8 +143,14 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
 
     @Override
     public void printFromBeginning() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'printFromBeginning'");
+        Node current = this.head;
+
+        int count = 0;
+        while (current != null) {
+            System.out.println("Index: " + count + " - value: " + current.getData());
+            count++;
+            current = current.getNext();
+        }
     }
 
     @Override
