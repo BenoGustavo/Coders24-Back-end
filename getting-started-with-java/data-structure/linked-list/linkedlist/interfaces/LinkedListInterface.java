@@ -1,5 +1,7 @@
 package linkedlist.interfaces;
 
+import linkedlist.components.Node;
+
 public interface LinkedListInterface<T> {
     // Insert values
     public void append(T data);
@@ -16,7 +18,8 @@ public interface LinkedListInterface<T> {
     public void printFromIndex(int index);
 
     // delete values
-    public void pop();
+    @SuppressWarnings("rawtypes")
+    public Node pop();
 
     public void deleteHead();
 
