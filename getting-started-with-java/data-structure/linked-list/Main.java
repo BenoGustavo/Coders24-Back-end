@@ -9,7 +9,12 @@ public class Main {
         linkedList.append(30);
         linkedList.append(40);
 
+        System.out.println("\nPrinting from the start: ");
         linkedList.printFromBeginning();
+
+        System.out.println("\nPrinting from the end: ");
+
+        linkedList.printFromEnd();
 
         System.out.println("\nRemoving the last elements: ");
 

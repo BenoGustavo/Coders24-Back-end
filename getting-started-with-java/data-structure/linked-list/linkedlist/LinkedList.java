@@ -47,6 +47,9 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
         current = this.getLastNode(current);
 
         current.next = new Node<>(data);
+
+        current.next.previous = current;
+
         this.length++;
     }
 
@@ -64,6 +67,8 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
         newHead.next = this.head;
         this.head = newHead;
         this.length++;
+
+        newHead.next.previous = newHead;
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -96,8 +101,12 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
             current = current.getNext();
         }
 
-        newNode.setNext(current.getNext());
-        current.setNext(newNode);
+        newNode.next = current.next;
+        current.next = newNode;
+
+        current.next.previous = current;
+
+        this.length++;
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -153,6 +162,9 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
 
     @Override
     public void printFromBeginning() {
+        /**
+         * Prints the linked list from the beginning to the end.
+         */
         Node current = this.head;
 
         int count = 0;
@@ -163,10 +175,24 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public void printFromEnd() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'printFromEnd'");
+        /*
+         * Prints the linked list from the end to the beginning.
+         */
+        Node current = this.head;
+
+        current = this.getLastNode(current);
+
+        int countIndexReverse = this.length - 1;
+        while (current.previous != null) {
+            System.out.println("Index: " + countIndexReverse + " - value: " + current.getData());
+            current = current.previous;
+            countIndexReverse--;
+        }
+        System.out.println("Index: " + countIndexReverse + " - value: " + current.getData());
+
     }
 
     @Override
