@@ -1,8 +1,8 @@
 package linkedlist.components;
 
 public class Node<T> {
-    private T data;
-    private Node<T> next = null;
+    public T data;
+    public Node<T> next = null;
 
     public Node(T data) {
         this.data = data;
