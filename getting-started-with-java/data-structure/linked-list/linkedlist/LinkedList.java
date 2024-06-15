@@ -14,12 +14,24 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
         this.length++;
     }
 
+    @SuppressWarnings("rawtypes")
     private Node getLastNode(Node currentNode) {
-        if (currentNode.getNext() == null) {
+        if (currentNode.next == null) {
             return currentNode;
         }
 
-        return getLastNode(currentNode.getNext());
+        return getLastNode(currentNode.next);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Node getAntepenultimate() {
+        Node current = this.head;
+
+        for (int i = 0; i < this.length - 2; i++) {
+            current = current.getNext();
+        }
+
+        return current;
     }
 
     @SuppressWarnings("unchecked")
@@ -34,7 +46,7 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
 
         current = this.getLastNode(current);
 
-        current.setNext(new Node<>(data));
+        current.next = new Node<>(data);
         this.length++;
     }
 
@@ -49,7 +61,7 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
 
         Node newHead = new Node<>(data);
 
-        newHead.setNext(this.head);
+        newHead.next = this.head;
         this.head = newHead;
         this.length++;
     }
@@ -95,16 +107,14 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
          * Removes the last element from the linked list and returns it.
          */
 
-        if (this.head.getNext() == null || this.head == null) {
+        if (this.head.next == null || this.head == null) {
             throw new IndexOutOfBoundsException("List is empty");
         }
 
-        Node current = this.head;
+        Node current = this.getAntepenultimate();
 
-        current = this.getLastNode(current);
-
-        Node deletedNode = current;
-        current.setData(null);
+        Node deletedNode = current.next;
+        current.next = (null);
 
         this.length--;
 
