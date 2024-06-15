@@ -3,9 +3,18 @@ package linkedlist.components;
 public class Node<T> {
     public T data;
     public Node<T> next = null;
+    public Node<T> previous = null;
 
     public Node(T data) {
         this.data = data;
+    }
+
+    public void setPrevious(Node<T> previous) {
+        this.previous = previous;
+    }
+
+    public Node<T> getPrevious() {
+        return this.previous;
     }
 
     public void setNext(Node<T> next) {
