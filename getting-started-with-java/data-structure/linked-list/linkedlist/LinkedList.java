@@ -4,13 +4,12 @@ import linkedlist.components.Node;
 import linkedlist.interfaces.LinkedListInterface;
 
 public class LinkedList<T> implements LinkedListInterface<Object> {
+    @SuppressWarnings("rawtypes")
     private Node head;
-    private T data;
     private int length = 0;
 
     public LinkedList(T data) {
         this.head = new Node<>(data);
-        this.data = data;
         this.length++;
     }
 
@@ -45,7 +44,7 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
         return current;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public void append(Object data) {
         /**
@@ -164,6 +163,7 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
         this.length--;
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public void deleteFromPosition(int index) {
         /**
@@ -222,6 +222,7 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
         this.length = 0;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public void printFromBeginning() {
         /**
@@ -257,6 +258,7 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
 
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public void printFromIndex(int index) {
         /*
