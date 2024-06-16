@@ -34,6 +34,17 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
         return current;
     }
 
+    @SuppressWarnings("rawtypes")
+    private Node getNodeAtIndex(int index) {
+        Node current = this.head;
+
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+
+        return current;
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public void append(Object data) {
@@ -42,6 +53,13 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
          *
          * @param data The data of the new element to be appended.
          */
+
+        if (this.head == null) {
+            this.head = new Node<>(data);
+            this.length++;
+            return;
+        }
+
         Node current = this.head;
 
         current = this.getLastNode(current);
@@ -130,34 +148,78 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
         return deletedNode;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void deleteHead() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteHead'");
+        /**
+         * Removes the first element from the linked list.
+         */
+
+        if (this.head == null) {
+            throw new IndexOutOfBoundsException("List is empty");
+        }
+
+        this.head = this.head.next;
+        this.head.previous = null;
+        this.length--;
     }
 
     @Override
     public void deleteFromPosition(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteFromPosition'");
+        /**
+         * Removes the element at the specified index from the linked list.
+         *
+         * @param index The index of the element to be removed.
+         * @throws IndexOutOfBoundsException if the index is out of the range (index < 0
+         *                                   || index >= length).
+         */
+
+        if (index < 0 || index >= this.length) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+
+        if (index == 0) {
+            deleteHead();
+            return;
+        }
+
+        Node current = this.head;
+
+        for (int i = 0; i < index - 1; i++) {
+            current = current.next;
+        }
+
+        current.next = current.next.next;
+        current.next.previous = current;
+
+        this.length--;
     }
 
     @Override
     public int getLength() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getLength'");
+        /*
+         * Returns the length of the linked list.
+         */
+        return this.length;
     }
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
+        /*
+         * Returns true if the linked list is empty, false otherwise.
+         */
+
+        return this.length == 0;
     }
 
     @Override
     public void makeEmpty() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'makeEmpty'");
+        /*
+         * Removes all elements from the linked list.
+         */
+
+        this.head = null;
+        this.length = 0;
     }
 
     @Override
@@ -197,7 +259,25 @@ public class LinkedList<T> implements LinkedListInterface<Object> {
 
     @Override
     public void printFromIndex(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'printFromIndex'");
+        /*
+         * prints the linked list from the specified index to the end.
+         * throws IndexOutOfBoundsException if the index is out of the range
+         */
+
+        if (index < 0 || index > this.length) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+
+        Node current = this.head;
+
+        current = this.getNodeAtIndex(index);
+
+        while (current.next != null) {
+            System.out.println("Index: " + index + " - value: " + current.getData());
+            current = current.next;
+            index++;
+        }
+
+        System.out.println("Index: " + index + " - value: " + current.getData());
     }
 }
