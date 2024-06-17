@@ -1,0 +1,14 @@
+{
+  "name": "gym_exercise",
+  "version": "1.0.0",
+  "description": "Random exercise from ada node back-end course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gustavo",
+  "license": "ISC",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}
