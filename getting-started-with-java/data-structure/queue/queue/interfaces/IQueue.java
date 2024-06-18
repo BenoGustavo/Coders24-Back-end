@@ -4,7 +4,7 @@ import queue.components.Node;
 
 public interface IQueue {
     @SuppressWarnings("rawtypes")
-    public void enqueue(Node item);
+    public <T> void enqueue(T item);
 
     @SuppressWarnings("rawtypes")
     public Node dequeue();
